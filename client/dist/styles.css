@@ -63,3 +63,18 @@ main {
   padding: 16px;
   margin: auto;
 }
+
+.model {
+  border: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cow-name {
+  padding: 5px;
+}
+.cow-description {
+  padding: 5px;
+}
