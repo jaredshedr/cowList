@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const {CowList, readAll, addOne} = require('./db.js')
+const {CowList, readAll, addOne, deleteOne} = require('./db.js')
 
 const app = express();
 
@@ -31,6 +31,24 @@ app.post('/api/cows', (req, res) => {
           res.status(500).send(err);
         } else {
           res.status(200).send(data);
+        }
+      })
+    }
+  })
+})
+
+app.delete('/api/cows', (req, res) => {
+  deleteOne(req.body, (err, data) => {
+    if (err) {
+      console.log('error updating', err)
+      res.status(500).send('error updating')
+    } else {
+      readAll((err, data) => {
+        if (err) {
+          console.log(err)
+          res.status(500).send(err);
+        } else {
+          res.status(201).send(data);
         }
       })
     }

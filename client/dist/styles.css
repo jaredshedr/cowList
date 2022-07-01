@@ -78,3 +78,8 @@ main {
 .cow-description {
   padding: 5px;
 }
+.button {
+  display: inline-block;
+  width: 60px;
+  padding: 5px;
+}

@@ -58,6 +58,20 @@ let addOne = function (data, callback) {
     })
 }
 
+let deleteOne = function (data, callback) {
+  Cows.destroy({ where: {cow_id: data.cowId}})
+    .then((data) => {
+      callback(null, data);
+    })
+    .catch((err) => {
+    callback(err, null);
+    })
+}
+
 module.exports.CowList = CowList;
 module.exports.readAll = readAll
 module.exports.addOne = addOne;
+module.exports.deleteOne = deleteOne;
+
+
+// Cows.findOrCreate({where: {cow_id: data.cowId}})

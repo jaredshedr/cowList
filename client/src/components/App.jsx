@@ -15,6 +15,8 @@ class App extends React.Component {
 
     this.addCow = this.addCow.bind(this);
     this.onCowClick = this.onCowClick.bind(this);
+    this.backBtn = this.backBtn.bind(this);
+    this.deleteBtn = this.deleteBtn.bind(this);
   }
 
   componentDidMount () {
@@ -62,12 +64,32 @@ class App extends React.Component {
     })
   }
 
+  backBtn () {
+    this.setState({
+      cowBool: false
+    })
+  }
+
+  deleteBtn (cowId) {
+
+    axios.delete('/api/cows',{ data: {cowId: cowId} })
+      .then((response) => {
+        this.setState({
+          cows: response.data,
+          cowBool: false
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
   render () {
 
     if (this.state.cowBool) {
       return (
         <div>
-          <Model cow={this.state.currentCow}/>
+          <Model deleteBtn={this.deleteBtn} backBtn={this.backBtn} cow={this.state.currentCow}/>
         </div>
       )
     } else {
