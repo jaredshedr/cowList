@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const {CowList, readAll, addOne, deleteOne} = require('./db.js')
+const {CowList, readAll, addOne, deleteOne, updateOne} = require('./db.js')
 
 const app = express();
 
@@ -51,6 +51,17 @@ app.delete('/api/cows', (req, res) => {
           res.status(201).send(data);
         }
       })
+    }
+  })
+})
+
+app.patch('/api/cows', (req, res) => {
+  updateOne(req.body, (err, data) => {
+    if (err) {
+      console.log('error patching', err);
+      res.status(500).send(err)
+    } else {
+      res.status(201).send(data);
     }
   })
 })

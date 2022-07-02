@@ -68,10 +68,27 @@ let deleteOne = function (data, callback) {
     })
 }
 
+let updateOne = function (data, callback) {
+  Cows.update({ description: data.description }, { where: {cow_id: data.cowId} })
+    .then((response) => {
+      Cows.findAll( { where: {cow_id: data.cowId} } )
+        .then((data) => {
+          callback(null, data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    })
+    .catch((err) => {
+      console.log(err);
+      callback(err, null)
+    })
+}
+
 module.exports.CowList = CowList;
 module.exports.readAll = readAll
 module.exports.addOne = addOne;
 module.exports.deleteOne = deleteOne;
+module.exports.updateOne = updateOne;
 
 
-// Cows.findOrCreate({where: {cow_id: data.cowId}})
